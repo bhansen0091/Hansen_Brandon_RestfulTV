@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows</title>
+</head>
+<body>
+    <div id="wrapper">
+        <header class="page_header">
+            <h1>All Shows</h1>
+        </header>
+        <main class="main_content">
+            <div class="display_table">
+                <table class="all_shows_table">
+                    <tr class="table_headings">
+                        <th class="id_heading headings">ID</th>
+                        <th class="title_heading headings">Title</th>
+                        <th class="network_heading headings">Network</th>
+                        <th class="release_date_heading headings">Release Date</th>
+                        <th class="actions_heading headings">Actions</th>
+                    </tr>
+                    {% for tv_show in tv_shows %}
+                    <tr class="table_data">
+                        <td class="show_id data_cells">{{tv_show.id}}</td>
+                        <td class="show_title data_cells">{{tv_show.title}}</td>
+                        <td class="show_network data_cells">
+                            {% for network in tv_show.networks.all %}
+                            {{network.name}}<br>
+                            {% endfor %}
+                        </td>
+                        <td class="show_release_date data_cells">{{tv_show.release_date}}</td>
+                        <td class="show_actions data_cells">ph for actions</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="add_a_show_link_container">
+                <a href="#">Add a New Show</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
