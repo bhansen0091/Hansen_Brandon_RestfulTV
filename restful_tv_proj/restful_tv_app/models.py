@@ -6,8 +6,10 @@ class Network(models.Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
-class TVShow(models.Model):
+class TV_Show(models.Model):
     title = models.CharField(max_length=255)
     networks = models.ManyToManyField(Network, related_name="shows")
     release_date = models.DateField()
-
+    desc = models.TextField()
+    created_at = DateTimeField(auto_now_add=True)
+    updated_at = DateTimeField(auto_now=True)

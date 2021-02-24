@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show View</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="page_header">
+            <h1>TV Show {{show.id}}</h1>
+            <a href="/shows" class="return_to_home">Go Back</a>
+        </header>
+        <main class="main_content show_specs_main_content">
+            <ul class="show_specs">
+                <li class="show_title show_spec_items">Title: {{show.title}}</li>
+                <li class="show_networks show_spec_items">
+                    Networks:
+                    <ul class="networks">
+                        {% for network in show.networks.all %}
+                            <li>{{network.name}}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="release_date show_spec_items">Release Date: {{show.release_date}}</li>
+                <li class="show_desc show_spec_items">Description: {{show.desc}}</li>
+            </ul>
+
+            <p>Last Updated at: {{show.updated_at}}</p>
+            <a href="/shows/{{show.id}}/edit" class="edit_show">Edit</a> | 
+            <a href="/shows/{{show.id}}/delete" class="delete_show">Delete</a>
+        </main>
+    </div>
+</body>
+</html>
