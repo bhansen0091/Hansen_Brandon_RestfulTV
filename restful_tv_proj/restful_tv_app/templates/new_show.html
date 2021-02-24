@@ -17,18 +17,23 @@
             <a href="/shows" class="return_to_home">Go Back</a>
         </header>
         <main class="main_content form_page_main_content">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
             <form action="/shows/create" class="add_new_show_form" method="POST">
                 {% csrf_token %}
                 <div class="form_top_container">
-                    <label for="add_title">Title:</label>
-                    <input type="text" name="add_title" class="add_title text_input">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" class="title text_input">
                 </div>
                 <div class="form_mid_container">
                     <div class="left_side">
-                        <label for="add_network">Network:</label>
+                        <label for="network">Network:</label>
                         <div class="exsiting_networks">
                             <label for="exsisting_networks">Exsisting Networks</label>
-                            <select name="add_network">
+                            <select name="network">
                                 {% for network in networks %}
                                 <option value="{{network.id}}">{{network.name}}</option>
                                 {% endfor %}
@@ -40,13 +45,13 @@
                         </div>
                     </div>
                     <div class="right_side">
-                        <label for="add_release_date">Release Date</label>
-                        <input type="date" name="add_release_date">
+                        <label for="release_date">Release Date</label>
+                        <input type="date" name="release_date">
                     </div>
                 </div>
                 <div class="form_bottom_container">
-                    <label for="add_desc">Description</label>
-                    <textarea name="add_desc" cols="30" rows="10" class="add_desc"></textarea>
+                    <label for="desc">Description</label>
+                    <textarea name="desc" cols="30" rows="10" class="desc"></textarea>
                 </div>
                 <button type="submit">Create</button>
             </form>
