@@ -11,7 +11,9 @@ class TV_Show_Manager(models.Manager):
         if len(post_data['desc']) <= 10:
             errors["desc"] = "Desc should be at leased 10 characters." 
 
-        if 'release_date' in post_data:
+        if len(post_data['release_date']) != 10:
+            errors['invalid_date'] = "Invalid Date"
+        else:
             rd_convert = datetime.datetime.strptime(post_data['release_date'], "%Y-%m-%d")
 
             if rd_convert > datetime.datetime.today():
