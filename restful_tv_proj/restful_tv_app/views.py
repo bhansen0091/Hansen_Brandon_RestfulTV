@@ -42,7 +42,7 @@ def create_show(request):
             release_date = request.POST['release_date'],
             desc = request.POST['desc']
         )
-        if len(request.POST['new_network']) <= 0:
+        if len(request.POST['add_new_network']) <= 0:
             new_show.networks.add(Network.objects.get(id = request.POST['network'])),
         else:
             new_show.networks.add(create_network(request)),
@@ -72,7 +72,7 @@ def update_show(request, id):
         this_show.release_date = request.POST['release_date']
         this_show.desc = request.POST['desc']
 
-        if len(request.POST['new_network']) <= 0:
+        if len(request.POST['add_new_network']) <= 0:
             this_show.networks.add(Network.objects.get(id = request.POST['network'])),
         else:
             this_show.networks.add(create_network(request)),
@@ -92,13 +92,17 @@ def delete_show(request, id):
     TV_Show.objects.get(id = id).delete()
     return redirect("/shows")
 
-
-
 #-------------------- Newtorks -------------------------
 
 def create_network(request):
+    errors = Network.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for k,v in errors.items():
+            messages.error(request, v)
+        return redirect ("/shows/new")
+
     new_network = Network.objects.create(
-        name = request.POST['new_network']
+        name = request.POST['add_new_network']
     )
     return(new_network)
 
